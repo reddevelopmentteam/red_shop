@@ -1,0 +1,3 @@
+[mcp_servers.laravel-boost]
+command = "wsl.exe"
+args = ["/home/ghaizan/.phpenv/versions/8.4.12/bin/php", "/home/ghaizan/works/websites/redshop/artisan", "boost:mcp"]
