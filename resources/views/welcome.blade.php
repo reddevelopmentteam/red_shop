@@ -37,7 +37,7 @@
                             <span>
                                 Read the
                                 <a href="https://laravel.com/docs" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ms-1">
-                                    <span>Documentations</span>
+                                    <span>Documentation</span>
                                     <svg
                                         width="10"
                                         height="11"
