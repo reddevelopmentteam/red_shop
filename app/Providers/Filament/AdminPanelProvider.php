@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\View\PanelsRenderHook;
+use Filament\Support\Facades\FilamentView;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -55,5 +57,13 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    public function boot(): void
+    {
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::HEAD_END,
+            fn (): string => '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v13/font/simple-icons.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />',
+        );
     }
 }

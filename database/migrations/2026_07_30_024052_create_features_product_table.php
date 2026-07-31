@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function(Blueprint $table){
-            $table->id();
-            $table->string('whatsapp_link')->nullable();
-            $table->string('tiktok_link')->nullable();
-            $table->string('instagram_link')->nullable();
-            $table->string('email_link')->nullable();
-            $table->timestamps();
+        Schema::create('features_product', function (Blueprint $table) {
+            $table->foreignId('product_id')->nullable()->constrained('products')->cascadeOnDelete();
+            $table->foreignId('feature_id')->nullable()->constrained('features')->cascadeOnDelete();
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('features_product');
     }
 };
