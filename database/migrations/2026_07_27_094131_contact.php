@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function(Blueprint $table){
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('whatsapp_link')->nullable();
             $table->string('tiktok_link')->nullable();

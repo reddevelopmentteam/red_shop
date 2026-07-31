@@ -9,6 +9,7 @@ use Override;
 class CreateContact extends CreateRecord
 {
     protected static string $resource = ContactResource::class;
+
     #[Override]
     protected function getRedirectUrl(): string
     {

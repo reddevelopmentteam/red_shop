@@ -17,7 +17,7 @@ class ContactsTable
                 TextColumn::make('whatsapp_link'),
                 TextColumn::make('tiktok_link'),
                 TextColumn::make('instagram_link'),
-                TextColumn::make('email_link')
+                TextColumn::make('email_link'),
             ])
             ->filters([
                 //

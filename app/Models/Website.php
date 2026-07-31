@@ -15,9 +15,9 @@ class Website extends Model
         'demo_link',
         'tech_stack',
         'status',
-        'category'
+        'category',
     ];
-    
+
     protected $casts = [
         'website_preview' => 'array',
         'tech_stack' => 'array',

@@ -680,6 +680,14 @@
     --ease-easeIn: cubic-bezier(0.42, 0, 1, 1);
     --ease-easeOut: cubic-bezier(0, 0, 0.58, 1);
     --ease-easeInOut: cubic-bezier(0.42, 0, 0.58, 1);
+
+    /* Animations */
+    --animate-marquee: marquee 40s linear infinite;
+    --animate-marquee-slow: marquee 60s linear infinite;
+
+    @keyframes marquee {
+        to { transform: translateX(-50%); }
+    }
 }
 
 :root {
@@ -1248,4 +1256,51 @@
     --Foundation-motion-easing-easeIn: cubic-bezier(0.42, 0, 1, 1);
     --Foundation-motion-easing-easeOut: cubic-bezier(0, 0, 0.58, 1);
     --Foundation-motion-easing-easeInOut: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-marquee,
+    .animate-marquee-slow {
+        animation-play-state: paused !important;
+    }
+}
+
+.hover-pause-marquee:hover {
+    animation-play-state: paused;
+}
+
+.discount-badge {
+    clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+
+.carousel {
+    --card-w: 100vw;
+}
+
+@media (min-width: 640px) {
+    .carousel {
+        --card-w: calc((100vw - 1.5rem) / 2);
+    }
+}
+
+@media (min-width: 1024px) {
+    .carousel {
+        --card-w: calc((100vw - 3rem) / 3);
+    }
+}
+
+.carousel-card {
+    width: var(--card-w);
+}
+
+@media (max-width: 639px) {
+    .animate-marquee {
+        animation-duration: 24s;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .animate-marquee {
+        animation-duration: 32s;
+    }
 }

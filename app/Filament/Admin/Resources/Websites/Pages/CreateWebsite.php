@@ -9,6 +9,7 @@ use Override;
 class CreateWebsite extends CreateRecord
 {
     protected static string $resource = WebsiteResource::class;
+
     #[Override]
     protected function getRedirectUrl(): string
     {

@@ -28,17 +28,17 @@ class WebsitesTable
                 TextColumn::make('demo_link'),
 
                 TextColumn::make('tech_stack')
-                ->badge(),
+                    ->badge(),
 
                 TextColumn::make('status')
-                ->badge()
-                ->color(fn (string $state): string => match ($state) {
-                    'dijual' => 'success',
-                    'tidak dijual' => 'danger'
-                }),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'dijual' => 'success',
+                        'tidak dijual' => 'danger'
+                    }),
 
                 TextColumn::make('category')
-                ->badge(),
+                    ->badge(),
             ])
             ->filters([
                 //

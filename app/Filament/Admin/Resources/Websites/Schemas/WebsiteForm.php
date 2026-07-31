@@ -15,47 +15,47 @@ class WebsiteForm
         return $schema
             ->components([
                 TextInput::make('website_name')
-                ->required(),
+                    ->required(),
 
                 TextInput::make('website_description')
-                ->required(),
+                    ->required(),
 
                 TextInput::make('website_price')
-                ->required(),
+                    ->required(),
 
                 FileUpload::make('website_thumbnail')
-                ->required()
-                ->image()
-                ->preserveFilenames(),
+                    ->required()
+                    ->image()
+                    ->preserveFilenames(),
 
                 FileUpload::make('website_preview')
-                ->required()
-                ->multiple()
-                ->image()
-                ->preserveFilenames(),
+                    ->required()
+                    ->multiple()
+                    ->image()
+                    ->preserveFilenames(),
 
                 TextInput::make('demo_link')
-                ->required(),
+                    ->required(),
 
                 TagsInput::make('tech_stack')
-                ->required(),
+                    ->required(),
 
                 Select::make('status')
-                ->required()
-                ->options([
-                    'dijual' => 'Dijual',
-                    'tidak dijual' => 'Tidak Dijual'
-                ]),
+                    ->required()
+                    ->options([
+                        'dijual' => 'Dijual',
+                        'tidak dijual' => 'Tidak Dijual',
+                    ]),
 
                 Select::make('category')
-                ->required()
-                ->multiple()
-                ->options([
-                    'portofolio' => 'Portofolio',
-                    'landing page' => 'Landing Page',
-                    'dashboard' => 'Dashboard',
-                    'e-commerce' => 'E-Commerce'
-                ])
+                    ->required()
+                    ->multiple()
+                    ->options([
+                        'portofolio' => 'Portofolio',
+                        'landing page' => 'Landing Page',
+                        'dashboard' => 'Dashboard',
+                        'e-commerce' => 'E-Commerce',
+                    ]),
             ]);
     }
 }
