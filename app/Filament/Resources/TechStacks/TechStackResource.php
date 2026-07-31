@@ -16,9 +16,10 @@ use Filament\Tables\Table;
 
 class TechStackResource extends Resource
 {
-    protected static ?string $model = TechStack::class;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-code-bracket';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-code-bracket' ;
+    protected static ?string $model = TechStack::class;
 
     public static function form(Schema $schema): Schema
     {
@@ -44,5 +45,10 @@ class TechStackResource extends Resource
             'create' => CreateTechStack::route('/create'),
             'edit' => EditTechStack::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Data Master';
     }
 }

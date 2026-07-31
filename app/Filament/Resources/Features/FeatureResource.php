@@ -18,7 +18,9 @@ class FeatureResource extends Resource
 {
     protected static ?string $model = Feature::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-sparkles';
+
+    protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-o-sparkles';
 
     public static function form(Schema $schema): Schema
     {
@@ -44,5 +46,10 @@ class FeatureResource extends Resource
             'create' => CreateFeature::route('/create'),
             'edit' => EditFeature::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Data Master';
     }
 }

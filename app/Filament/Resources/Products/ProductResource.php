@@ -16,9 +16,12 @@ use Filament\Tables\Table;
 
 class ProductResource extends Resource
 {
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-shopping-bag';
+
+    protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-shopping-bag';
+
     protected static ?string $model = Product::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
     {
@@ -44,5 +47,10 @@ class ProductResource extends Resource
             'create' => CreateProduct::route('/create'),
             'edit' => EditProduct::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Data Master';
     }
 }

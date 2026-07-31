@@ -20,7 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\View\PanelsRenderHook;
 use Filament\Support\Facades\FilamentView;
-
+use Filament\Navigation\NavigationGroup;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -30,9 +30,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->colors([
-                'primary' => Color::Amber,
+            ->navigationGroups([
+                NavigationGroup::make('Data Master')
             ])
+            ->brandLogo(asset('images/logo/red_logo.png'))
+            ->colors([
+                'primary' => Color::Red,
+            ])
+            // ->brandLogo()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -63,7 +68,7 @@ class AdminPanelProvider extends PanelProvider
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::HEAD_END,
-            fn (): string => '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v13/font/simple-icons.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />',
+            fn (): string => '<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>',
         );
     }
 }

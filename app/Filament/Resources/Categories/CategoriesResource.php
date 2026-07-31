@@ -16,9 +16,11 @@ use Filament\Tables\Table;
 
 class CategoriesResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+     protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-squares-2x2';
+
+    protected static ?string $model = Category::class;
 
     public static function form(Schema $schema): Schema
     {
@@ -44,5 +46,10 @@ class CategoriesResource extends Resource
             'create' => CreateCategories::route('/create'),
             'edit' => EditCategories::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Data Master';
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Products\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
@@ -31,7 +32,7 @@ class ProductsTable
                         $techStack = $record->techStacks->firstWhere('name', $state);
                         
                         $iconHtml = ($techStack && $techStack->icon)
-                            ? "<i class='si si-{$techStack->icon}' style='font-size: 1.2rem; margin-right: 0.35rem;'></i>"
+                            ? "<iconify-icon icon='simple-icons:{$techStack->icon}' style='font-size: 1.25rem; margin-right: 0.35rem;' inline></iconify-icon>"
                             : '';
 
                         return new HtmlString("<span style='display: inline-flex; align-items: center; margin-right: 0.5rem;'>{$iconHtml}" . e($state) . "</span>");
@@ -69,6 +70,7 @@ class ProductsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

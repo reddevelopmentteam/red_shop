@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class Product extends Model
 {
     protected $fillable = [
-        'category_id',
         'name',
         'slug',
         'price',
@@ -30,9 +30,9 @@ class Product extends Model
         'views' => 'integer',
     ];
 
-    public function category(): BelongsTo
+    public function category(): BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_product');
     }
 
     public function features(): BelongsToMany
