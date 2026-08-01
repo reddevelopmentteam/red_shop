@@ -17,16 +17,18 @@
     @livewireStyles
 </head>
 
-<body class="min-h-screen overflow-x-hidden">
-    <header class="sticky top-0 w-full flex justify-center">
+<body class="min-h-screen flex flex-col">
+    <header class="sticky top-0 w-full flex justify-center z-50">
         <livewire:home.navbar class="relative" />
     </header>
-    {{ $slot }}
+    <main class="flex-1">
+        {{ $slot }}
+    </main>
 
     @livewireScripts
     <footer
-        class="absolute -bottom-15 bg-linear-to-t from-brand-tertiary from-1% to-background-white to-60% w-full flex justify-center">
-        <livewire:home.footer class="relative" />
+        class="bg-linear-to-t from-brand-tertiary from-0% to-background-white to-30% flex justify-center">
+        <livewire:home.footer />
     </footer>
 </body>
 

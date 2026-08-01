@@ -1,5 +1,5 @@
-<div class="flex flex-col px-16 pt-6 pb-2.5 max-w-360">
-    <div id="top" class="flex justify-between py-4 w-full">
+<div class="flex flex-col px-16 max-w-360">
+    <div id="top" class="flex justify-between py-4 w-full -mb-8">
         <img src={{ asset('images/logo/logo_footer.png') }} alt="logo_footer">
         <div class="flex gap-16">
             <div>
@@ -28,9 +28,6 @@
                     <li>
                         <a href="#" class="text-lg font-family-body text-text-link hover:underline">Kontak</a>
                     </li>
-                    <li>
-                        <a href="#" class="text-lg font-family-body text-text-link hover:underline">Lisensi</a>
-                    </li>
                 </menu>
             </div>
         </div>
@@ -45,6 +42,7 @@
             </li>
         </menu>
     </div>
-    <div id="down" class="font-family-display font-bold text-text-brand text-[260px] text-center tracking-[3px] leading-[0.8]">
-        REDSHOP</div>
+    <div id="down">
+        <img src={{ asset('images/logo/REDSHOP.png') }} alt="REDSHOP">
+    </div>
 </div>
