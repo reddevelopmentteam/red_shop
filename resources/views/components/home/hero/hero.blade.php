@@ -18,6 +18,7 @@
             </div>
         </div>
         <div id="cta" class="flex gap-4 mt-22.25">
+            {{-- searchbar --}}
             <div x-data="{ open: false }" @click.away="open = false" class="relative bg-white shadow-lg rounded-xl">
                 <input type="search" id="searchALl" placeholder="Cari landing page, portofolio, dashboard..."
                     @focus="open = true" @blur="open = false"
@@ -31,6 +32,7 @@
 
                 </span>
 
+                {{-- search  suggestion --}}
                 <div x-show="open" x-transition:enter="transition ease-out duration-200"
                     x-transition:enter-start="opacity-0 translate-y-1"
                     x-transition:enter-end="opacity-100 translate-y-0"
@@ -147,7 +149,7 @@
             </div>
             <div
                 class="flex justify-center items-center gap-2.5 bg-background-brand rounded-xl px-6 py-4 cursor-pointer shadow-md">
-                <button class="text-interactive-destructive-text-default font-family-display text-lg cursor-pointer">
+                <button class="text-interactive-destructive-text-default font-family-label text-lg cursor-pointer">
                     Lihat Katalog
                 </button>
                 </span>
