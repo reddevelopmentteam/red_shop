@@ -1,16 +1,7 @@
-<section class="px-16 py-12">
-    <div class="flex items-center justify-between mb-8">
-        <h1 class="font-family-display text-3xl font-bold text-text-primary">{{ $title }}
-            <span class="text-text-brand">{{ $highlight }}</span>
-        </h1>
-        <a href="#"
-            class="flex items-center gap-1 font-family-body text-sm font-medium text-text-brand hover:text-interactive-primary-background-hover transition-colors">
-            Lihat Semua
-            <iconify-icon icon="material-symbols:chevron-right" width="16" height="16"></iconify-icon>
-        </a>
-    </div>
+<section class="py-8">
+    <h2 class="font-family-display text-2xl font-bold text-text-primary mb-6">Semua Template</h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-4 gap-6">
         @foreach ($templates as $template)
             @php
                 $statusConfig = match ($template['status']) {
@@ -21,9 +12,10 @@
                 };
             @endphp
             <a href="#"
-                class="group bg-surface-default rounded-xl shadow-sm transition-all hover:shadow-md overflow-hidden">
+                class="group bg-surface-default rounded-xl overflow-hidden shadow-sm">
                 <div class="relative h-62.5 overflow-hidden">
-                    <img src="{{ $template['thumbnail'] }}" alt="{{ $template['name'] }}"
+                    <img src="https://picsum.photos/seed/{{ Str::slug($template['name']) }}/600/400"
+                        alt="{{ $template['name'] }}"
                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                     <span
                         class="absolute bottom-3 right-3 rounded-full px-3 py-1 font-family-body text-xs font-medium {{ $statusConfig['class'] }}">
@@ -34,21 +26,21 @@
                     <h3 class="font-family-body text-lg text-text-primary">
                         {{ $template['name'] }}</h3>
                     <span
-                        class="inline-block mt-2 rounded-full bg-background-info px-3 py-0.5 font-family-body text-xs font-medium text-text-secondary">
+                        class="inline-block mt-2 rounded-full bg-background-info px-3 py-0.5 font-family-body text-xs font-bold text-text-secondary">
                         {{ $template['category'] }}
                     </span>
                     @if ($template['status'] === 'tersedia')
-                        <div class="mt-10 flex items-center gap-2">
+                        <div class="mt-8 flex-col gap-2">
                             <span
-                                class="font-family-display text-lg font-bold {{ $template['originalPrice'] ? 'text-text-brand' : 'text-text-primary' }}">
+                                class="font-family-display text-2xl font-bold {{ $template['originalPrice'] ? 'text-text-brand' : 'text-text-primary' }}">
                                 {{ $template['price'] }}
                             </span>
                             @if ($template['originalPrice'])
-                                <span class="font-family-body text-sm text-text-tertiary line-through">
+                                <span class="font-family-body font-bold text-[16px] text-text-disabled">
                                     {{ $template['originalPrice'] }}
                                 </span>
                                 <span
-                                    class="discount-badge bg-background-error px-2 pl-5 py-1 font-family-body text-xs font-medium text-text-error">
+                                    class="discount-badge bg-background-error px-2 pl-5 py-1 font-family-body text-[16px] font-bold text-text-error">
                                     {{ $template['discount'] }}%
                                 </span>
                             @endif

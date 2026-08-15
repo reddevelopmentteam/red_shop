@@ -6,10 +6,7 @@
         <a href="#"
             class="flex items-center gap-1 font-family-body text-sm font-medium text-text-brand hover:text-interactive-primary-background-hover transition-colors">
             Lihat Semua
-            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <iconify-icon icon="material-symbols:chevron-right" width="16" height="16"></iconify-icon>
         </a>
     </div>
 
@@ -29,10 +26,7 @@
                     <div class="flex flex-row-reverse items-end justify-between">
                         <div
                             class="self-end w-11 h-11 rounded-full bg-transparent flex items-center justify-center border border-brand-primary shadow-md group-hover:bg-white transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                <path d="M0 0h24v24H0z" fill="none" />
-                                <path fill="#dc2626" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" />
-                            </svg>
+                            <iconify-icon icon="material-symbols:arrow-forward" width="20" height="20" class="text-text-brand"></iconify-icon>
                         </div>
                         <p class="font-family-body text-sm text-text-inverse mt-1 opacity-80">
                             {{ $category['count'] }} Templates</p>

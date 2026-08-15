@@ -20,17 +20,16 @@
 </head>
 
 <body class="min-h-screen flex flex-col">
-    <header class="sticky top-0 w-full flex justify-center z-50">
-        <livewire:home.navbar class="relative" />
+    <header class="bg-linear-to-b from-brand-tertiary/40 from-0% to-white to-100%">
+        <livewire:catalog.navbar />
     </header>
     <main class="flex-1">
         {{ $slot }}
     </main>
 
     @livewireScripts
-    <footer
-        class="bg-linear-to-t from-brand-tertiary/70 from-0% to-white to-50% flex justify-center">
-        <livewire:home.footer />
+    <footer class="bg-linear-to-t from-brand-tertiary/70 from-0% to-white to-50% flex justify-center">
+        <livewire:catalog.footer />
     </footer>
 </body>
 
