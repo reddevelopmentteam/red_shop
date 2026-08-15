@@ -41,7 +41,7 @@
                                         {{ $template['originalPrice'] }}
                                     </span>
                                     <span
-                                        class="discount-badge bg-background-error px-2 pl-5 py-1 font-family-body text-[16px] font-bold text-text-error">
+                                        class="discount-badge bg-background-error px-2 pl-5 py-1 font-family-body text-[16px] text-text-error">
                                         {{ $template['discount'] }}%
                                     </span>
                                 @endif
