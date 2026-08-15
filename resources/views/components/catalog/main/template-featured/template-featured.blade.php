@@ -73,11 +73,11 @@
                                 {{ $template['price'] }}
                             </span>
                             @if ($template['originalPrice'])
-                                <span class="font-family-body font-bold text-[16px] text-text-disabled">
+                                <span class="font-family-body line-through text-[16px] text-text-disabled">
                                     {{ $template['originalPrice'] }}
                                 </span>
                                 <span
-                                    class="discount-badge bg-background-error px-2 pl-5 py-1 font-family-body text-[16px] font-bold text-text-error">
+                                    class="discount-badge bg-background-error px-2 pl-5 py-1 font-family-body text-[16px] text-text-error">
                                     {{ $template['discount'] }}%
                                 </span>
                             @endif
