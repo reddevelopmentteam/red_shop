@@ -37,7 +37,7 @@
                                     {{ $template['price'] }}
                                 </span>
                                 @if ($template['originalPrice'])
-                                    <span class="font-family-body font-bold text-[16px] text-text-disabled">
+                                    <span class="font-family-body line-through text-[16px] text-text-disabled">
                                         {{ $template['originalPrice'] }}
                                     </span>
                                     <span
