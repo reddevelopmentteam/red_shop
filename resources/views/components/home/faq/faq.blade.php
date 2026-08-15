@@ -16,14 +16,9 @@
                         class="w-full flex items-center justify-between gap-4 px-6 py-4 text-left">
                         <span
                             class="font-family-display font-bold text-lg text-text-primary">{{ $faq['question'] }}</span>
-                        <div class="bg-transparent p-1 rounded-full border-4 border-brand-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"
-                                class="shrink-0 transition-transform duration-200"
-                                :class="open === {{ $index }} && 'rotate-180'">
-                                <path d="M0 0h24v24H0z" fill="none" />
-                                <path fill="#dc2626" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z" />
-                            </svg>
-                        </div>
+                        <iconify-icon icon="material-symbols:expand-circle-down-outline" width="36" height="36"
+                            class="text-text-brand shrink-0 transition-transform duration-200"
+                            :class="open === {{ $index }} && 'rotate-180'"></iconify-icon>
                     </button>
                     <div x-show="open === {{ $index }}" x-collapse>
                         <p class="px-6 pb-4 font-family-body text-base text-text-secondary">{{ $faq['answer'] }}</p>
