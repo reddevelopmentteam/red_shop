@@ -16,6 +16,8 @@
             <livewire:catalog.main.template-featured :key="'template-featured'" />
         @endif
         <livewire:catalog.main.template-all :key="'template-all'" :templates="$this->getPageTemplates()" />
-        <livewire:catalog.main.pagination :key="'pagination'" :page="$currentPage" :totalPages="$this->getTotalPages()" />
+        @if (count($this->getPageTemplates()) > 0)
+            <livewire:catalog.main.pagination :key="'pagination'" :page="$currentPage" :totalPages="$this->getTotalPages()" />
+        @endif
     </main>
 </div>

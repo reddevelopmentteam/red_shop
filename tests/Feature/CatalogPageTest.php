@@ -290,3 +290,15 @@ test('catalog page clears the search term when filters are reset', function () {
         ->dispatch('filters-reset')
         ->assertSet('cari', null);
 });
+
+test('empty state shows when no templates match', function () {
+    $html = Livewire::test('pages::catalog', ['cari' => 'xyznonexistent'])->html();
+
+    expect($html)->toContain('Template tidak ditemukan');
+    expect($html)->toContain(asset('catalog/no-card.svg'));
+});
+
+test('pagination is hidden when no templates match', function () {
+    Livewire::test('pages::catalog', ['cari' => 'xyznonexistent'])
+        ->assertDontSeeHtml('wire:click="goToPage');
+});
