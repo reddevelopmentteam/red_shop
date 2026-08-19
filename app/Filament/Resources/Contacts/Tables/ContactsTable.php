@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Tables;
+namespace App\Filament\Resources\Contacts\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class CategoriesTable
+class ContactsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('slug'),
+                TextColumn::make('whastapp_link'),
+                TextColumn::make('tiktok_link'),
+                TextColumn::make('instagram_link'),
+                TextColumn::make('email_link'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -38,15 +37,14 @@ class CategoriesTable
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No Categories Yet')
-            ->emptyStateDescription('Once you add the first category, it will appear here.')
-            ->emptyStateIcon('heroicon-o-tag');
+            ->emptyStateHeading('No Contacts Data Yet')
+            ->emptyStateDescription('Once you add the first contact information, it will appear here.')
+            ->emptyStateIcon('heroicon-o-envelope');
     }
 }

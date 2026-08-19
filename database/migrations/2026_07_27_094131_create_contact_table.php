@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('email_link')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

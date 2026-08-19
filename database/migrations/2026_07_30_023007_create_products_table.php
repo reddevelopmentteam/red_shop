@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('demo_link');
             $table->integer('views')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

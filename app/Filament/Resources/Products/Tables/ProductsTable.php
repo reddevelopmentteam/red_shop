@@ -8,6 +8,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
 class ProductsTable
@@ -16,14 +17,15 @@ class ProductsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-
+                TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('category.name')
+                    ->searchable()
                     ->label('Category')
                     ->badge(),
 
                 TextColumn::make('slug'),
-
                 TextColumn::make('techStacks.name') // Tambahkan .name agar Filament mengambil per item
                     ->label('Tech Stack')
                     ->formatStateUsing(function ($state, $record, $component) {
@@ -38,35 +40,41 @@ class ProductsTable
                         return new HtmlString("<span style='display: inline-flex; align-items: center; margin-right: 0.5rem;'>{$iconHtml}" . e($state) . "</span>");
                     })
                     ->html(),
-
                 TextColumn::make('price')
-                ->prefix('Rp'),
-
-                TextColumn::make('discount_price'),
-
+                    ->prefix('Rp')
+                    ->sortable(),
+                TextColumn::make('discount_price')
+                    ->sortable(),
                 TextColumn::make('status')
-                ->badge()
-                ->color(fn (string $state): string => match ($state) {
-                    'for sale' => 'success',
-                    'not for sale' => 'danger'
-                }),
-
+                    ->sortable()
+                    ->searchable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'for sale' => 'success',
+                        'not for sale' => 'danger'
+                    }),
                 ImageColumn::make('thumbnail'),
-
                 ImageColumn::make('img'),
-
                 TextColumn::make('about'),
-
                 TextColumn::make('license'),
-
                 TextColumn::make('version'),
-
                 TextColumn::make('demo_link'),
-
-                TextColumn::make('views')
+                TextColumn::make('views'),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -76,6 +84,9 @@ class ProductsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->emptyStateHeading('No Products Yet')
+            ->emptyStateDescription('Once you add the first product, it will appear here.')
+            ->emptyStateIcon('heroicon-o-shopping-bag');
     }
 }
