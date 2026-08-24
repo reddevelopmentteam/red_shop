@@ -14,9 +14,8 @@
         @foreach ($templates as $template)
             @php
                 $statusConfig = match ($template['status']) {
-                    'tersedia' => ['label' => 'Tersedia', 'class' => 'bg-background-success text-text-success'],
-                    'akan_datang' => ['label' => 'Akan Datang', 'class' => 'bg-background-warning text-text-warning'],
-                    'tidak_tersedia' => ['label' => 'Tidak Tersedia', 'class' => 'bg-background-error text-text-error'],
+                    'for sale' => ['label' => 'tersedia', 'class' => 'bg-background-success text-text-success'],
+                    'not for sale' => ['label' => 'tidak tersedia', 'class' => 'bg-background-error text-text-error'],
                     default => ['label' => $template['status'], 'class' => 'bg-background-subtle text-text-secondary'],
                 };
             @endphp
@@ -37,7 +36,7 @@
                         class="inline-block mt-2 rounded-full bg-background-info px-3 py-0.5 font-family-body text-xs font-medium text-text-secondary">
                         {{ $template['category'] }}
                     </span>
-                    @if ($template['status'] === 'tersedia')
+                    @if ($template['status'] === 'for sale')
                         <div class="mt-10 flex items-center gap-2">
                             <span
                                 class="font-family-display text-lg font-bold {{ $template['originalPrice'] ? 'text-text-brand' : 'text-text-primary' }}">

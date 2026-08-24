@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -282,6 +283,13 @@ new #[Layout('layouts::catalog')] class extends Component
 
     private function allTemplates(): array
     {
+        return Product::query()
+            ->with(['category', 'techStacks'])
+            ->latest()
+            ->get()
+            ->map(fn (Product $product): array => $this->formatProduct($product))
+            ->all();
+
         $templates = [
             // Page 1
             ['name' => 'Portfolio Agency', 'category' => 'Portfolio', 'price' => 'Rp299.000', 'originalPrice' => null, 'discount' => null, 'status' => 'tersedia'],
@@ -450,5 +458,43 @@ new #[Layout('layouts::catalog')] class extends Component
                 return $template;
             })
             ->all();
+    }
+
+    private function formatProduct(Product $product): array
+    {
+        $hasDiscount = $product->discount_price !== null && $product->price > 0;
+        $thumbnail = $product->thumbnail;
+        $thumbnailPath = ltrim($thumbnail, '/');
+
+        if (str_starts_with($thumbnailPath, 'storage/')) {
+            $thumbnailPath = substr($thumbnailPath, 8);
+        }
+
+        $status = $product->status === 'for sale' ? 'tersedia' : 'tidak_tersedia';
+        $licence = match ($product->license) {
+            'commercial' => 'Komersial',
+            'personal & commercial' => 'Personal & Komersial',
+            default => 'Personal',
+        };
+
+        return [
+            'name' => $product->name,
+            'category' => $product->category->first()?->name ?? 'Tanpa kategori',
+            'price' => 'Rp'.number_format($product->discount_price ?? $product->price, 0, ',', '.'),
+            'originalPrice' => $hasDiscount
+                ? 'Rp'.number_format($product->price, 0, ',', '.')
+                : null,
+            'discount' => $hasDiscount
+                ? (int) round((1 - $product->discount_price / $product->price) * 100)
+                : null,
+            'status' => $status,
+            'type' => $this->typeFor($product->category->first()?->name ?? '', $product->id),
+            'tech' => $product->techStacks->first()?->name ?? 'HTML',
+            'licence' => $licence,
+            'thumbnail' => filter_var($thumbnail, FILTER_VALIDATE_URL)
+                ? $thumbnail
+                : asset('storage/'.$thumbnailPath),
+            'demoLink' => $product->demo_link,
+        ];
     }
 };

@@ -12,10 +12,10 @@
                         default => ['label' => $template['status'], 'class' => 'bg-background-subtle text-text-secondary'],
                     };
                 @endphp
-                <a href="#"
+                <a href="{{ $template['demoLink'] ?? '#' }}"
                     class="group bg-surface-default rounded-xl overflow-hidden shadow-sm">
                     <div class="relative h-62.5 overflow-hidden">
-                        <img src="https://picsum.photos/seed/{{ Str::slug($template['name']) }}/600/400"
+                        <img src="{{ $template['thumbnail'] }}"
                             alt="{{ $template['name'] }}"
                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                         <span

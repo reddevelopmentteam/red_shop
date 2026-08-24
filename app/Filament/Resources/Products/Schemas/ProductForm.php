@@ -63,12 +63,14 @@ class ProductForm
                         FileUpload::make('thumbnail')
                         ->required()
                         ->image()
+                            ->disk('public')
                         ->columnSpan(1),
 
                         FileUpload::make('img')
                         ->required()
                         ->multiple()
                         ->image()
+                            ->disk('public')
                         ->columnSpan(1),
 
                         TextInput::make('about')
