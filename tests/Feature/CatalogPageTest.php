@@ -113,12 +113,13 @@ test('catalog page combines filters across groups', function () {
 
     $violations = collect($templates)->filter(function (array $template): bool {
         $value = (int) str_replace(['Rp', '.'], '', $template['price'] ?? '0');
+        $techLabels = array_column($template['techStacks'], 'label');
 
         return $template['status'] !== 'tersedia'
             || $value < 100000
             || $value > 250000
-            || $template['tech'] !== 'Laravel'
-            || $template['licence'] !== 'Personal';
+            || ! in_array('Laravel', $techLabels)
+            || $template['license'] !== 'Personal';
     })->count();
 
     expect($violations)->toBe(0);
