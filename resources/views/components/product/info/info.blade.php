@@ -64,7 +64,7 @@
 
     {{-- Live Demo Button --}}
     <a href="{{ $template['demoLink'] }}" target="_blank"
-        class="mt-4 flex items-center justify-center gap-2 w-full py-3 rounded-lg border-2 border-brand-primary text-brand-primary font-family-body text-sm font-semibold hover:bg-brand-primary hover:text-white transition-colors">
+        class="mt-4 flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-background-error text-brand-primary font-family-body text-sm font-semibold hover:bg-brand-primary hover:text-white transition-colors">
         <iconify-icon icon="mdi:web" width="18" height="18"></iconify-icon>
         Live Demo
         <iconify-icon icon="material-symbols:arrow-outward-outline-rounded" width="18" height="18"></iconify-icon>

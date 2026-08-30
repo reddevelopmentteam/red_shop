@@ -30,7 +30,7 @@
                 x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
                 @click="lightboxOpen = false" @keydown.escape.window="lightboxOpen = false"
                 x-cloak
-                class="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 p-8">
+                class="fixed inset-0 z-999 flex items-center justify-center bg-black/80 p-8">
                 <button @click.stop="lightboxOpen = false"
                     class="absolute top-6 right-6 flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 transition-colors cursor-pointer">
                     <iconify-icon icon="material-symbols:close" width="24" height="24" class="text-white"></iconify-icon>
