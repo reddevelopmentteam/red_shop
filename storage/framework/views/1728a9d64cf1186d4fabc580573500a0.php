@@ -1,6 +1,6 @@
 <div class="flex justify-between mt-2.5 px-8 py-2.5 shadow-md bg-background-default items-center rounded-xl gap-20">
     <div id="left">
-        <img src={{ asset('images/logo/brand.png') }} alt="brand">
+        <img src=<?php echo e(asset('images/logo/brand.png')); ?> alt="brand">
     </div>
     <div id="middle">
         <menu class="flex gap-4">
@@ -76,7 +76,7 @@
             </span>
         </form>
 
-        {{-- Suggestions dropdown --}}
+        
         <div x-show="open" x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
@@ -107,4 +107,4 @@
             </div>
         </div>
     </div>
-</div>
+</div><?php /**PATH /var/www/html/dev/red_shop/storage/framework/views/livewire/views/6d1649f5.blade.php ENDPATH**/ ?>

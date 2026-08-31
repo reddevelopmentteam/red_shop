@@ -26,7 +26,7 @@
                         <a href="#" class="text-lg font-family-body text-text-link hover:underline">FAQ</a>
                     </li>
                     <li>
-                        <a href="#" class="text-lg font-family-body text-text-link hover:underline">Kontak</a>
+                        <a href="/contact" class="text-lg font-family-body text-text-link hover:underline">Kontak</a>
                     </li>
                 </menu>
             </div>
