@@ -12,7 +12,8 @@
                         default => ['label' => $template['status'], 'class' => 'bg-background-subtle text-text-secondary'],
                     };
                 @endphp
-                <a href="{{ $template['demoLink'] ?? '#' }}"
+                <a href="{{ route('product', Str::slug($template['name'])) }}"
+                    wire:navigate
                     class="group bg-surface-default rounded-xl overflow-hidden shadow-sm">
                     <div class="relative h-62.5 overflow-hidden">
                         <img src="{{ $template['thumbnail'] }}"
