@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </li>
-            <li><a href="#" class="hover:text-text-link font-family-body text-lg text-text-secondary">Kontak</a>
+            <li><a href="/contact" class="hover:text-text-link font-family-body text-lg text-text-secondary">Kontak</a>
             </li>
         </menu>
     </div>
