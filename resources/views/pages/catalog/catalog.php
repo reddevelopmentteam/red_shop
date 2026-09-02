@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\TemplateData;
+use App\Models\Product;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -284,6 +284,74 @@ new #[Layout('layouts::catalog')] class extends Component
 
     private function allTemplates(): array
     {
-        return TemplateData::all();
+        return Product::query()
+            ->with(['category', 'techStacks'])
+            ->latest()
+            ->get()
+            ->map(fn (Product $product): array => $this->formatProduct($product))
+            ->all();
+    }
+
+    private function typeFor(string $category, int $seed): string
+    {
+        return match ($category) {
+            'SaaS' => 'SaaS',
+            'Landing Page' => 'Startup',
+            'Portfolio' => 'Agency',
+            'Dashboard', 'E-Commerce', 'Data Management' => 'Business',
+            'Blog', 'Education' => 'Personal',
+            default => ['SaaS', 'Startup', 'Agency', 'Business', 'Personal'][$seed % 5],
+        };
+    }
+
+    private function formatProduct(Product $product): array
+    {
+        $categoryName = $product->category->first()?->name ?? 'Tanpa kategori';
+        $basePrice = (float) ($product->price ?? 0);
+        $discountPrice = $product->discount_price !== null ? (float) $product->discount_price : null;
+        $hasDiscount = $discountPrice !== null && $basePrice > 0 && $discountPrice < $basePrice;
+
+        $thumbnail = $product->thumbnail ?? '';
+        $thumbnailPath = ltrim($thumbnail, '/');
+
+        if (str_starts_with($thumbnailPath, 'storage/')) {
+            $thumbnailPath = substr($thumbnailPath, 8);
+        }
+
+        $techStacks = $product->techStacks
+            ->map(fn ($tech) => [
+                'label' => $tech->name,
+                'slug' => strtolower(str_replace(['.', ' '], ['', '-'], $tech->name)),
+            ])
+            ->values()
+            ->all();
+
+        if ($techStacks === []) {
+            $techStacks = [['label' => 'HTML', 'slug' => 'html']];
+        }
+
+        $status = $product->status === 'for sale' ? 'tersedia' : 'tidak_tersedia';
+        $license = match ($product->license) {
+            'commercial' => 'Komersial',
+            'personal & commercial' => 'Personal & Komersial',
+            default => 'Personal',
+        };
+
+        return [
+            'name' => $product->name,
+            'category' => $categoryName,
+            'price' => 'Rp'.number_format($discountPrice ?? $basePrice, 0, ',', '.'),
+            'originalPrice' => $hasDiscount ? 'Rp'.number_format($basePrice, 0, ',', '.') : null,
+            'discount' => $hasDiscount ? (int) round((1 - $discountPrice / $basePrice) * 100) : null,
+            'status' => $status,
+            'type' => $this->typeFor($categoryName, $product->id),
+            'tech' => $techStacks[0]['label'] ?? 'HTML',
+            'techStacks' => $techStacks,
+            'license' => $license,
+            'thumbnail' => filter_var($thumbnail, FILTER_VALIDATE_URL)
+                ? $thumbnail
+                : asset('storage/'.$thumbnailPath),
+            'demoLink' => $product->demo_link,
+        ];
     }
 };

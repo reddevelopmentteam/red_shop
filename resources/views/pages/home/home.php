@@ -1,86 +1,61 @@
 <?php
 
+use App\Models\Product;
 use Livewire\Component;
+use Livewire\Attributes\Computed;
 
 new class extends Component
 {
     /** @var array<int, array{name: string, category: string, price: string, originalPrice: ?string, discount: ?int, status: string, thumbnail: string}> */
-    public array $newestTemplates = [
-        [
-            'name' => 'Portfolio Agency',
-            'category' => 'Portfolio',
-            'price' => 'Rp249.000',
-            'originalPrice' => 'Rp349.000',
-            'discount' => 29,
-            'status' => 'tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/portfolio-agency/600/400',
-        ],
-        [
-            'name' => 'SaaS Landing Page',
-            'category' => 'Landing Page',
-            'price' => 'Rp299.000',
-            'originalPrice' => null,
-            'discount' => null,
-            'status' => 'tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/saas-landing/600/400',
-        ],
-        [
-            'name' => 'Admin Dashboard',
-            'category' => 'Dashboard',
-            'price' => 'Rp349.000',
-            'originalPrice' => 'Rp449.000',
-            'discount' => 22,
-            'status' => 'akan_datang',
-            'thumbnail' => 'https://picsum.photos/seed/admin-dashboard/600/400',
-        ],
-        [
-            'name' => 'Toko Online Fashion',
-            'category' => 'E-Commerce',
-            'price' => 'Rp399.000',
-            'originalPrice' => null,
-            'discount' => null,
-            'status' => 'tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/fashion-store/600/400',
-        ],
-    ];
+    #[Computed]
+    public function newestTemplates(): array
+    {
+        return Product::query()
+            ->with('category')
+            ->latest()
+            ->take(8)
+            ->get()
+            ->map(fn (Product $product): array => $this->formatProduct($product))
+            ->all();
+    }
 
-    /** @var array<int, array{name: string, category: string, price: string, originalPrice: ?string, discount: ?int, status: string, thumbnail: string}> */
-    public array $bestSellingTemplates = [
-        [
-            'name' => 'Corporate Profile',
-            'category' => 'Portfolio',
-            'price' => 'Rp199.000',
-            'originalPrice' => 'Rp299.000',
-            'discount' => 33,
-            'status' => 'tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/corporate-profile/600/400',
-        ],
-        [
-            'name' => 'Startup Landing Page',
-            'category' => 'Landing Page',
-            'price' => 'Rp249.000',
-            'originalPrice' => null,
-            'discount' => null,
-            'status' => 'tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/startup-landing/600/400',
-        ],
-        [
-            'name' => 'Analytics Dashboard',
-            'category' => 'Dashboard',
-            'price' => 'Rp449.000',
-            'originalPrice' => null,
-            'discount' => null,
-            'status' => 'tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/analytics-dashboard/600/400',
-        ],
-        [
-            'name' => 'Marketplace Store',
-            'category' => 'E-Commerce',
-            'price' => 'Rp499.000',
-            'originalPrice' => 'Rp599.000',
-            'discount' => 17,
-            'status' => 'tidak_tersedia',
-            'thumbnail' => 'https://picsum.photos/seed/marketplace-store/600/400',
-        ],
-    ];
+    #[Computed]
+    public function bestSellingTemplates(): array
+    {
+        return Product::query()
+            ->with('category')
+            ->orderByDesc('views')
+            ->take(8)
+            ->get()
+            ->map(fn (Product $product): array => $this->formatProduct($product))
+            ->all();
+    }
+
+    private function formatProduct(Product $product): array
+    {
+            $hasDiscount = $product->discount_price !== null && $product->price > 0;
+            $thumbnail = $product->thumbnail;
+            $thumbnailPath = ltrim($thumbnail, '/');
+
+            if (str_starts_with($thumbnailPath, 'storage/')) {
+                $thumbnailPath = substr($thumbnailPath, 8);
+            }
+
+        return [
+            'name' => $product->name,
+            'category' => $product->category->first()?->name ?? 'Tanpa kategori',
+            'price' => 'Rp'.number_format($product->discount_price ?? $product->price, 0, ',', '.'),
+            'originalPrice' => $hasDiscount
+                ? 'Rp'.number_format($product->price, 0, ',', '.')
+                : null,
+            'discount' => $hasDiscount
+                ? (int) round((1 - $product->discount_price / $product->price) * 100)
+                : null,
+                'status' => $product->status === 'for sale' ? 'for sale' : 'not for sale',
+                'thumbnail' => filter_var($thumbnail, FILTER_VALIDATE_URL)
+                    ? $thumbnail
+                    : asset('storage/'.$thumbnailPath),
+                'demoLink' => $product->demo_link,
+        ];
+    }
 };

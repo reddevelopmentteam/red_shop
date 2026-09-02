@@ -12,15 +12,15 @@
                         default => ['label' => $template['status'], 'class' => 'bg-background-subtle text-text-secondary'],
                     };
                 @endphp
-                <a href="{{ route('product', $template['slug']) }}"
+                <a href="{{ route('product', Str::slug($template['name'])) }}"
                     wire:navigate
                     class="group bg-surface-default rounded-xl overflow-hidden shadow-sm">
                     <div class="relative h-62.5 overflow-hidden">
-                        <img src="https://picsum.photos/seed/{{ Str::slug($template['name']) }}/600/400"
+                        <img src="{{ $template['thumbnail'] }}"
                             alt="{{ $template['name'] }}"
                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                         <span
-                            class="absolute bottom-3 right-3 rounded-2xl px-4 py-3 font-family-body text-xs font-medium {{ $statusConfig['class'] }}">
+                            class="absolute bottom-3 right-3 rounded-full px-3 py-1 font-family-body text-xs font-medium {{ $statusConfig['class'] }}">
                             {{ $statusConfig['label'] }}
                         </span>
                     </div>
