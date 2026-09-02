@@ -218,6 +218,18 @@ test('catalog page sorts templates by name ascending', function () {
     expect($names)->toEqual(collect($names)->sort()->values()->all());
 });
 
+test('featured section loads real products from the database', function () {
+    $product = \App\Models\Product::query()->first();
+
+    expect($product)->not->toBeNull();
+
+    $component = Livewire::test('catalog.main.template-featured');
+
+    $names = collect($component->instance()->featuredTemplates())->pluck('name')->all();
+
+    expect($names)->toContain($product->name);
+});
+
 test('catalog page sorts templates by discount descending for terlaris', function () {
     $component = Livewire::test('pages::catalog')
         ->dispatch('sort-changed', sort: 'terlaris');
